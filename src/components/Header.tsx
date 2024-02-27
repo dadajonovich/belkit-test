@@ -1,6 +1,6 @@
-import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
-import { useTheme } from "../features/theme/use-theme";
-import { Link } from "react-router-dom";
+import { AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';
+import { useTheme } from '../features/theme/use-theme';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   const [, toggleTheme] = useTheme();
@@ -9,7 +9,7 @@ export const Header = () => {
     <>
       <header className="sticky flex items-center justify-between text-secondary">
         <Link to="/" className="btn btn-ghost text-2xl font-bold uppercase">
-          Template Store
+          The White Whale
         </Link>
         <div className="flex items-center gap-4">
           <label className="btn btn-ghost swap swap-rotate">
