@@ -11,7 +11,7 @@ function App() {
       <main className="mx-auto my-6 w-11/12	rounded-2xl bg-base-300 p-4">
         <Header />
         <Routes>
-          <Route path="/" element={<SignIn />} />
+          <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
