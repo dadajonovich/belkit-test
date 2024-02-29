@@ -1,9 +1,31 @@
-import { AiOutlineShoppingCart, AiOutlineUser } from 'react-icons/ai';
+import { AiOutlineUser } from 'react-icons/ai';
 import { useTheme } from '../features/theme/use-theme';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthorized } from '../hooks/useAuthorized';
+import { useSignOutMutation } from '../features/data/data-api';
+import { useEffect } from 'react';
 
 export const Header = () => {
+  const navigate = useNavigate();
   const [, toggleTheme] = useTheme();
+  const [isAuthorized, removeAuthorized] = useAuthorized();
+  const [signOut, { data, error, isError }] = useSignOutMutation();
+
+  useEffect(() => {
+    console.log(data);
+    if (data?.status === 'ok') {
+      removeAuthorized();
+      navigate('/');
+    }
+  }, [data]);
+
+  useEffect(() => {
+    console.log(error);
+    if (error && 'status' in error && error.status === 401) {
+      removeAuthorized();
+      navigate('/');
+    }
+  }, [error]);
 
   return (
     <>
@@ -12,6 +34,23 @@ export const Header = () => {
           The White Whale
         </Link>
         <div className="flex items-center gap-4">
+          {isAuthorized ? (
+            <details className="dropdown ">
+              <summary className="btn">
+                <AiOutlineUser className="h-10 w-10 text-secondary" />
+              </summary>
+              <ul className="menu dropdown-content z-[1] w-[120px] rounded-box bg-base-100 p-2 shadow">
+                <li>
+                  <button onClick={() => signOut()}>Sign out</button>
+                </li>
+              </ul>
+            </details>
+          ) : (
+            <Link className="btn btn-ghost" to="/sign-in">
+              <AiOutlineUser className="h-10 w-10" />
+            </Link>
+          )}
+
           <label className="btn btn-ghost swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input

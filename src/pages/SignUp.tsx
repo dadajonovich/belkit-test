@@ -1,7 +1,7 @@
 import { FormEventHandler, useEffect, useRef } from 'react';
 import { useSignUpMutation } from '../features/data/data-api';
 import { SignUpArg } from '../types';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const SignUp = () => {
   useEffect(() => {
     console.log(data);
     if (data?.status === 'ok') {
-      navigate('/sign-in');
+      navigate('/');
     }
   }, [data, navigate]);
 
@@ -31,7 +31,7 @@ export const SignUp = () => {
   }, [error, navigate]);
   return (
     <>
-      <div className="hero min-h-screen">
+      <div className="hero">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
             <form ref={formRef} onSubmit={handleSubmit} className="card-body">
@@ -75,11 +75,11 @@ export const SignUp = () => {
                 <button className="btn btn-primary">Sign up</button>
               </div>
               {isError && (
-                <label className="label">
-                  <span className="label-text-alt text-secondary">
+                <div className="label">
+                  <span className="label-text-alt  text-secondary">
                     Registration error
                   </span>
-                </label>
+                </div>
               )}
             </form>
           </div>

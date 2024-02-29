@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { SignUpArg, StatusData } from '../../types';
 import { SignInArg } from '../../types/SignInArg';
+import { createHeaders } from '../../utils/createHeaders';
 
 export const dataApi = createApi({
   reducerPath: '@@data',
@@ -11,24 +12,26 @@ export const dataApi = createApi({
         url: '/api/register',
         method: 'POST',
         body,
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: createHeaders(),
       }),
     }),
-    signIn: builder.mutation<StatusData, SignInArg>({
+    signIn: builder.mutation<StatusData<{ token: string }>, SignInArg>({
       query: (body) => ({
         url: '/api/login',
         method: 'POST',
         body,
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
+        headers: createHeaders(),
+      }),
+    }),
+    signOut: builder.mutation<StatusData, void>({
+      query: () => ({
+        url: '/api/logout',
+        method: 'POST',
+        headers: createHeaders(),
       }),
     }),
   }),
 });
 
-export const { useSignUpMutation, useSignInMutation } = dataApi;
+export const { useSignUpMutation, useSignInMutation, useSignOutMutation } =
+  dataApi;
