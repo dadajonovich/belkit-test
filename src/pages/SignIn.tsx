@@ -32,7 +32,7 @@ export const SignIn = () => {
   }, [error]);
 
   return (
-    <div className="hero ">
+    <div className="hero flex grow items-center justify-center">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
           <form ref={formRef} onSubmit={handleSubmit} className="card-body">
@@ -71,7 +71,7 @@ export const SignIn = () => {
               )}
               <Link
                 to="/sign-up"
-                className="link-hover link label-text-alt mt-4 text-center "
+                className="link-hover link label-text-alt mt-4 text-center"
               >
                 Sign up
               </Link>

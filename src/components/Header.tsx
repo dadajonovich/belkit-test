@@ -9,7 +9,7 @@ export const Header = () => {
   const navigate = useNavigate();
   const [, toggleTheme] = useTheme();
   const [isAuthorized, removeAuthorized] = useAuthorized();
-  const [signOut, { data, error, isError }] = useSignOutMutation();
+  const [signOut, { data, error }] = useSignOutMutation();
 
   useEffect(() => {
     console.log(data);
@@ -29,17 +29,20 @@ export const Header = () => {
 
   return (
     <>
-      <header className="sticky flex items-center justify-between text-secondary">
+      <header className="flex items-center justify-between text-secondary">
         <Link to="/" className="btn btn-ghost text-2xl font-bold uppercase">
           The White Whale
         </Link>
         <div className="flex items-center gap-4">
           {isAuthorized ? (
-            <details className="dropdown ">
+            <details className="dropdown">
               <summary className="btn">
                 <AiOutlineUser className="h-10 w-10 text-secondary" />
               </summary>
-              <ul className="menu dropdown-content z-[1] w-[120px] rounded-box bg-base-100 p-2 shadow">
+              <ul className="menu dropdown-content z-[1] w-[160px] rounded-box bg-base-100 p-2 shadow">
+                <li>
+                  <Link to="/explorer">File manager</Link>
+                </li>
                 <li>
                   <button onClick={() => signOut()}>Sign out</button>
                 </li>

@@ -20,7 +20,7 @@ export const SignUp = () => {
     if (data?.status === 'ok') {
       navigate('/');
     }
-  }, [data, navigate]);
+  }, [data]);
 
   useEffect(() => {
     console.log(error);
@@ -28,10 +28,10 @@ export const SignUp = () => {
     /*     if (error && 'originalStatus' in error && error.originalStatus === 200) {
       // navigate('/');
     } */
-  }, [error, navigate]);
+  }, [error]);
   return (
     <>
-      <div className="hero">
+      <div className="hero flex grow items-center justify-center">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="card w-full max-w-sm shrink-0 bg-base-100 shadow-2xl">
             <form ref={formRef} onSubmit={handleSubmit} className="card-body">
