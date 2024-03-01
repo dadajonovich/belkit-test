@@ -2,7 +2,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { useTheme } from '../features/theme/use-theme';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthorized } from '../hooks/useAuthorized';
-import { useSignOutMutation } from '../features/data/data-api';
+import { useSignOutMutation } from '../features/data/auth-api';
 import { useEffect } from 'react';
 
 export const Header = () => {

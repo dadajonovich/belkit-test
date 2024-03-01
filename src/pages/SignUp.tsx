@@ -1,5 +1,5 @@
 import { FormEventHandler, useEffect, useRef } from 'react';
-import { useSignUpMutation } from '../features/data/data-api';
+import { useSignUpMutation } from '../features/data/auth-api';
 import { SignUpArg } from '../types';
 import { Link, useNavigate } from 'react-router-dom';
 

@@ -1,7 +1,7 @@
 import { FormEventHandler, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { SignInArg } from '../types/SignInArg';
-import { useSignInMutation } from '../features/data/data-api';
+import { SignInArg } from '../types';
+import { useSignInMutation } from '../features/data/auth-api';
 
 export const SignIn = () => {
   // const [isUninitialized, setIsUninitialized] = useState(false);

@@ -1,15 +1,17 @@
-export const createHeaders = () => {
+export const createHeaders = (isFormData: boolean = false) => {
   const token = localStorage.getItem('token');
-  if (token !== null) {
-    return {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    };
+  const headers: Record<string, string> = { Accept: 'application/json' };
+
+  if (isFormData) {
+    headers['Content-Type'] = 'multipart/form-data';
   } else {
-    return {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    };
+    headers['Content-Type'] = 'application/json';
   }
+
+  if (token !== null) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  console.log(headers);
+
+  return headers;
 };

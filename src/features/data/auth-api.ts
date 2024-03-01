@@ -3,8 +3,8 @@ import { SignUpArg, StatusData } from '../../types';
 import { SignInArg } from '../../types/SignInArg';
 import { createHeaders } from '../../utils/createHeaders';
 
-export const dataApi = createApi({
-  reducerPath: '@@data',
+export const authApi = createApi({
+  reducerPath: '@@auth',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://js-test.kitactive.ru' }),
   endpoints: (builder) => ({
     signUp: builder.mutation<StatusData, SignUpArg>({
@@ -34,4 +34,4 @@ export const dataApi = createApi({
 });
 
 export const { useSignUpMutation, useSignInMutation, useSignOutMutation } =
-  dataApi;
+  authApi;

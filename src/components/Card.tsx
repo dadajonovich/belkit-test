@@ -1,13 +1,9 @@
 import NotFoundPick from '/404.jpg';
 import { AiOutlineClose } from 'react-icons/ai';
+import { FileDto } from '../types';
 
-type CardProps = {
-  imageSrc: string;
-  title: string;
-};
-
-export const Card = (props: CardProps) => {
-  const { imageSrc, title } = props;
+export const Card = (props: FileDto) => {
+  const { fileName, url } = props;
   return (
     <div className="card indicator">
       <span className="indicator-item m-1 rounded-full bg-secondary text-xl">
