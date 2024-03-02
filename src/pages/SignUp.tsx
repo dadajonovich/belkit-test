@@ -1,7 +1,7 @@
 import { FormEventHandler, useEffect, useRef } from 'react';
 import { useSignUpMutation } from '../features/data/auth-api';
 import { SignUpArg } from '../types';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
   const navigate = useNavigate();

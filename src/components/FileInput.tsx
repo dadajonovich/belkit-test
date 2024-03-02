@@ -1,4 +1,4 @@
-import { ChangeEventHandler, MouseEventHandler, useEffect } from 'react';
+import { ChangeEventHandler, MouseEventHandler } from 'react';
 import {
   useGetFilesQuery,
   useUploadMutation,
@@ -6,7 +6,7 @@ import {
 import { isSuccess } from '../utils/isSuccess';
 
 export const FileInput = () => {
-  const [upload, { data, error }] = useUploadMutation();
+  const [upload] = useUploadMutation();
   const { data: filesData } = useGetFilesQuery();
   let sum = 0;
 
@@ -27,7 +27,7 @@ export const FileInput = () => {
     }
 
     if (sum > 1048576) {
-      alert('Размер файлов превышен');
+      alert('The file size is more than 1 megabyte');
       return;
     }
 
@@ -44,13 +44,6 @@ export const FileInput = () => {
     }
   };
 
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
-
-  useEffect(() => {
-    console.log('error', error);
-  }, [error]);
   return (
     <input
       onClick={handleClick}

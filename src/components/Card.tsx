@@ -5,17 +5,12 @@ import {
   useDeleteFileMutation,
   useGetFileQuery,
 } from '../features/data/files-api';
-import { useEffect } from 'react';
 
 export const Card = (props: FileDto) => {
-  const { fileName, url, id, mimeType } = props;
-  const { data, error } = useGetFileQuery(id);
+  const { fileName, id, mimeType } = props;
+  const { data } = useGetFileQuery(id);
 
   const [deleteFile] = useDeleteFileMutation();
-
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
 
   return (
     <div className="indicator">

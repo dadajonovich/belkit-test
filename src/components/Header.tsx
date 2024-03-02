@@ -15,7 +15,6 @@ export const Header = () => {
   const { data: filesData } = useGetFilesQuery();
 
   useEffect(() => {
-    console.log(data);
     if (data?.status === 'ok') {
       removeAuthorized();
       navigate('/');
@@ -23,7 +22,6 @@ export const Header = () => {
   }, [data]);
 
   useEffect(() => {
-    console.log(error);
     if (error && 'status' in error && error.status === 401) {
       removeAuthorized();
       navigate('/');

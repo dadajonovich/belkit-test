@@ -1,19 +1,10 @@
-import { useEffect } from 'react';
 import { Card } from '../components/Card';
 import { FileInput } from '../components/FileInput';
 import { useGetFilesQuery } from '../features/data/files-api';
 import { isSuccess } from '../utils/isSuccess';
 
 export const Explorer = () => {
-  const { data, error } = useGetFilesQuery();
-
-  useEffect(() => {
-    console.log('data', data);
-  }, [data]);
-
-  useEffect(() => {
-    console.log('error', error);
-  }, [error]);
+  const { data } = useGetFilesQuery();
 
   return (
     <div className="mt-8">
