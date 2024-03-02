@@ -31,7 +31,7 @@ export const FileInput = () => {
       return;
     }
 
-    console.log(Array.from(formData.entries()));
+    // console.log(Array.from(formData.entries()));
     upload(formData);
   };
 

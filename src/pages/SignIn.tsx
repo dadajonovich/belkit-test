@@ -5,7 +5,6 @@ import { useSignInMutation } from '../features/data/auth-api';
 import { isSuccess } from '../utils/isSuccess';
 
 export const SignIn = () => {
-  // const [isUninitialized, setIsUninitialized] = useState(false);
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   const [signIn, { data, error, isError }] = useSignInMutation();
@@ -15,22 +14,20 @@ export const SignIn = () => {
     if (!formRef.current) return;
     const formData = new FormData(formRef.current);
     const arg = Object.fromEntries(formData) as SignInArg;
-    console.log(arg);
     signIn(arg);
   };
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
     if (isSuccess(data)) {
       localStorage.setItem('token', data.token || '');
-      // setIsUninitialized(true);
       navigate('/');
     }
   }, [data]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log(error);
-  }, [error]);
+  }, [error]); */
 
   return (
     <div className="hero flex grow items-center justify-center">

@@ -2,11 +2,12 @@ import { FormEventHandler, useEffect, useRef } from 'react';
 import { useSignUpMutation } from '../features/data/auth-api';
 import { SignUpArg } from '../types';
 import { useNavigate } from 'react-router-dom';
+import { isSuccess } from '../utils/isSuccess';
 
 export const SignUp = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
-  const [signUp, { data, error, isError }] = useSignUpMutation();
+  const [signUp, { data, isError }] = useSignUpMutation();
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (!formRef.current) return;
@@ -16,19 +17,11 @@ export const SignUp = () => {
   };
 
   useEffect(() => {
-    console.log(data);
-    if (data?.status === 'ok') {
+    if (isSuccess(data)) {
       navigate('/');
     }
   }, [data]);
 
-  useEffect(() => {
-    console.log(error);
-
-    /*     if (error && 'originalStatus' in error && error.originalStatus === 200) {
-      // navigate('/');
-    } */
-  }, [error]);
   return (
     <>
       <div className="hero flex grow items-center justify-center">
