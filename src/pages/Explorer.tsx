@@ -1,21 +1,11 @@
-import { ChangeEventHandler, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Card } from '../components/Card';
 import { FileInput } from '../components/FileInput';
-import { useUploadMutation } from '../features/data/files-api';
+import { useGetFilesQuery } from '../features/data/files-api';
+import { isSuccess } from '../utils/isSuccess';
 
 export const Explorer = () => {
-  const [upload, { data, error }] = useUploadMutation();
-
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const formData = new FormData();
-    const files = e.target.files;
-    if (!files) return;
-    for (let i = 0; i < files.length; i++) {
-      formData.append('files[]', files[i], files[i].name);
-    }
-    console.log(Array.from(formData.entries()));
-    upload(formData);
-  };
+  const { data, error } = useGetFilesQuery();
 
   useEffect(() => {
     console.log('data', data);
@@ -27,11 +17,11 @@ export const Explorer = () => {
 
   return (
     <div className="mt-8">
-      <FileInput onChange={handleChange} />
+      <FileInput />
       <div className="mt-8 grid grid-cols-4 justify-items-center gap-y-16">
-        {[...new Array(12)].map((_, index) => (
-          <Card key={index} />
-        ))}
+        {data &&
+          isSuccess(data) &&
+          data.files.map((item) => <Card {...item} key={item.id} />)}
       </div>
     </div>
   );

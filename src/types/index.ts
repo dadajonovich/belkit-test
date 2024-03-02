@@ -1,4 +1,4 @@
 export * from './SignUpArg';
-export * from './StatusData';
+export * from './Responce';
 export * from './SignInArg';
 export * from './FileDto';

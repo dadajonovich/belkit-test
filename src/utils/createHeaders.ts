@@ -1,15 +1,25 @@
-export const createHeaders = (isFormData: boolean = false) => {
+type HeadersCreationOptions = {
+  isFormData?: boolean;
+  responceFile?: boolean;
+};
+
+export const createHeaders = (options: HeadersCreationOptions = {}) => {
+  const { isFormData, responceFile } = options;
+
   const token = localStorage.getItem('token');
-  const headers: Record<string, string> = { Accept: 'application/json' };
+  const headers: Record<string, string> = {};
 
   if (!isFormData) {
     headers['Content-Type'] = 'application/json';
   }
 
-  if (token !== null) {
+  if (!responceFile) {
+    headers['Accept'] = 'application/json';
+  }
+
+  if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  console.log(headers);
 
   return headers;
 };

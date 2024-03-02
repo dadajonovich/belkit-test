@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { SignUpArg, StatusData } from '../../types';
+import { ResponceData, SignUpArg } from '../../types';
 import { SignInArg } from '../../types/SignInArg';
 import { createHeaders } from '../../utils/createHeaders';
 
@@ -7,7 +7,7 @@ export const authApi = createApi({
   reducerPath: '@@auth',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://js-test.kitactive.ru' }),
   endpoints: (builder) => ({
-    signUp: builder.mutation<StatusData, SignUpArg>({
+    signUp: builder.mutation<ResponceData, SignUpArg>({
       query: (body) => ({
         url: '/api/register',
         method: 'POST',
@@ -15,7 +15,7 @@ export const authApi = createApi({
         headers: createHeaders(),
       }),
     }),
-    signIn: builder.mutation<StatusData<{ token: string }>, SignInArg>({
+    signIn: builder.mutation<ResponceData<{ token: string }>, SignInArg>({
       query: (body) => ({
         url: '/api/login',
         method: 'POST',
@@ -23,7 +23,7 @@ export const authApi = createApi({
         headers: createHeaders(),
       }),
     }),
-    signOut: builder.mutation<StatusData, void>({
+    signOut: builder.mutation<ResponceData, void>({
       query: () => ({
         url: '/api/logout',
         method: 'POST',

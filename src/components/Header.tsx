@@ -4,12 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthorized } from '../hooks/useAuthorized';
 import { useSignOutMutation } from '../features/data/auth-api';
 import { useEffect } from 'react';
+import { useGetFilesQuery } from '../features/data/files-api';
+import { isSuccess } from '../utils/isSuccess';
 
 export const Header = () => {
   const navigate = useNavigate();
   const [, toggleTheme] = useTheme();
   const [isAuthorized, removeAuthorized] = useAuthorized();
   const [signOut, { data, error }] = useSignOutMutation();
+  const { data: filesData } = useGetFilesQuery();
 
   useEffect(() => {
     console.log(data);
@@ -36,8 +39,11 @@ export const Header = () => {
         <div className="flex items-center gap-4">
           {isAuthorized ? (
             <details className="dropdown">
-              <summary className="btn">
+              <summary className="btn indicator">
                 <AiOutlineUser className="h-10 w-10 text-secondary" />
+                <span className="badge indicator-item badge-secondary">
+                  {isSuccess(filesData) && filesData.files.length}
+                </span>
               </summary>
               <ul className="menu dropdown-content z-[1] w-[160px] rounded-box bg-base-100 p-2 shadow">
                 <li>
