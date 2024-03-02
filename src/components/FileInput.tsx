@@ -8,20 +8,29 @@ import { isSuccess } from '../utils/isSuccess';
 export const FileInput = () => {
   const [upload, { data, error }] = useUploadMutation();
   const { data: filesData } = useGetFilesQuery();
+  let sum = 0;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (!isSuccess(filesData)) return;
     const formData = new FormData();
     const files = e.target.files;
+
     if (!files || files.length === 0) return;
     if (files.length + filesData.files.length > 19) {
-      alert('Лимит превышен!');
+      alert('The limit has been exceeded!');
       return;
     }
 
     for (let i = 0; i < files.length; i++) {
+      sum += files[i].size;
       formData.append('files[]', files[i], files[i].name);
     }
+
+    if (sum > 1048576) {
+      alert('Размер файлов превышен');
+      return;
+    }
+
     console.log(Array.from(formData.entries()));
     upload(formData);
   };
@@ -31,7 +40,7 @@ export const FileInput = () => {
 
     if (filesData.files.length >= 19) {
       e.preventDefault();
-      alert('Лимит исчерпан!');
+      alert('The limit has been reached!');
     }
   };
 
