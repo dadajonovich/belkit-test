@@ -8,11 +8,7 @@ export const Explorer = () => {
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const formData = new FormData();
-    const firstFile = e.target.files?.[0];
     const files = e.target.files;
-    console.log(firstFile);
-    if (!firstFile) return;
-    // formData.append('files', firstFile, firstFile.name);
     if (!files) return;
     for (let i = 0; i < files.length; i++) {
       formData.append('files[]', files[i], files[i].name);

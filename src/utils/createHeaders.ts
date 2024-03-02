@@ -2,9 +2,7 @@ export const createHeaders = (isFormData: boolean = false) => {
   const token = localStorage.getItem('token');
   const headers: Record<string, string> = { Accept: 'application/json' };
 
-  if (isFormData) {
-    headers['Content-Type'] = 'multipart/form-data';
-  } else {
+  if (!isFormData) {
     headers['Content-Type'] = 'application/json';
   }
 

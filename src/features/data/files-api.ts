@@ -12,7 +12,6 @@ export const filesApi = createApi({
         method: 'POST',
         body,
         headers: createHeaders(true),
-        // formData: true,
       }),
     }),
   }),
