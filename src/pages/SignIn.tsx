@@ -2,6 +2,7 @@ import { FormEventHandler, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SignInArg } from '../types';
 import { useSignInMutation } from '../features/data/auth-api';
+import { isSuccess } from '../utils/isSuccess';
 
 export const SignIn = () => {
   // const [isUninitialized, setIsUninitialized] = useState(false);
@@ -20,7 +21,7 @@ export const SignIn = () => {
 
   useEffect(() => {
     console.log(data);
-    if (data?.status === 'ok') {
+    if (isSuccess(data)) {
       localStorage.setItem('token', data.token || '');
       // setIsUninitialized(true);
       navigate('/');

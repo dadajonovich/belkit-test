@@ -41,9 +41,11 @@ export const Header = () => {
             <details className="dropdown">
               <summary className="btn indicator">
                 <AiOutlineUser className="h-10 w-10 text-secondary" />
-                <span className="badge indicator-item badge-secondary">
-                  {isSuccess(filesData) && filesData.files.length}
-                </span>
+                {isSuccess(filesData) && (
+                  <span className="badge indicator-item badge-secondary">
+                    {filesData.files.length}
+                  </span>
+                )}
               </summary>
               <ul className="menu dropdown-content z-[1] w-[160px] rounded-box bg-base-100 p-2 shadow">
                 <li>
