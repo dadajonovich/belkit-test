@@ -1,14 +1,17 @@
-import { ChangeEventHandler, MouseEventHandler } from 'react';
+import { ChangeEventHandler, MouseEventHandler, useEffect } from 'react';
 import {
   useGetFilesQuery,
   useUploadMutation,
 } from '../features/data/files-api';
 import { isSuccess } from '../utils/isSuccess';
+import { useAppDispatch } from '../store';
+import { showModal } from '../features/modal/modal-slice';
 
 export const FileInput = () => {
-  const [upload] = useUploadMutation();
+  const dispatch = useAppDispatch();
+  const [upload, { error }] = useUploadMutation();
   const { data: filesData } = useGetFilesQuery();
-  let sum = 0;
+  let weightFiles = 0;
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (!isSuccess(filesData)) return;
@@ -17,30 +20,37 @@ export const FileInput = () => {
 
     if (!files || files.length === 0) return;
     if (files.length + filesData.files.length > 19) {
-      alert('The limit has been exceeded!');
+      dispatch(showModal('The limit has been exceeded!'));
+      // alert('The limit has been exceeded!');
       return;
     }
 
     for (let i = 0; i < files.length; i++) {
-      sum += files[i].size;
+      weightFiles += files[i].size;
       formData.append('files[]', files[i], files[i].name);
     }
 
-    if (sum > 1048576) {
-      alert('The file size is more than 1 megabyte');
+    if (weightFiles > 1048576) {
+      dispatch(showModal('The file size is more than 1 megabyte'));
+      // alert('The file size is more than 1 megabyte');
       return;
     }
 
-    // console.log(Array.from(formData.entries()));
+    console.log(Array.from(formData.entries()));
     upload(formData);
   };
+
+  // useEffect(() => {
+  //   console.log(error);
+  // }, [error]);
 
   const handleClick: MouseEventHandler<HTMLInputElement> = (e) => {
     if (!isSuccess(filesData)) return;
 
     if (filesData.files.length >= 19) {
       e.preventDefault();
-      alert('The limit has been reached!');
+      dispatch(showModal('The limit has been reached!'));
+      // alert('The limit has been reached!');
     }
   };
 

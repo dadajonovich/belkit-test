@@ -7,27 +7,23 @@ import { isSuccess } from '../utils/isSuccess';
 export const SignIn = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
-  const [signIn, { data, error, isError }] = useSignInMutation();
+  const [signIn, { data, isError }] = useSignInMutation();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     if (!formRef.current) return;
     const formData = new FormData(formRef.current);
     const arg = Object.fromEntries(formData) as SignInArg;
+
     signIn(arg);
   };
 
   useEffect(() => {
-    // console.log(data);
     if (isSuccess(data)) {
       localStorage.setItem('token', data.token || '');
       navigate('/');
     }
   }, [data]);
-
-  /*   useEffect(() => {
-    console.log(error);
-  }, [error]); */
 
   return (
     <div className="hero flex grow items-center justify-center">

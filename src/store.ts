@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
 import { themeReducer } from './features/theme/theme-slice';
+import { modalReducer } from './features/modal/modal-slice';
 import { authApi } from './features/data/auth-api';
 import { filesApi } from './features/data/files-api';
 
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
+    modal: modalReducer,
     [authApi.reducerPath]: authApi.reducer,
     [filesApi.reducerPath]: filesApi.reducer,
   },

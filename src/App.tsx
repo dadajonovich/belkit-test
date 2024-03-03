@@ -6,6 +6,7 @@ import { NotFound } from './pages/NotFound';
 import { SignUp } from './pages/SignUp';
 import { Home } from './pages/Home';
 import { Explorer } from './pages/Explorer';
+import { Modal } from './components/Modal';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         </Routes>
       </main>
       <Footer />
+      <Modal />
     </div>
   );
 }

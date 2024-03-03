@@ -23,12 +23,7 @@ export const Card = (props: FileDto) => {
       <a download={fileName} href={data} className="w-32">
         <figure className="h-32">
           {mimeType.startsWith('image') ? (
-            <img
-              className="aspect-square object-cover"
-              // src={imageSrc}
-              src={data}
-              // alt={title}
-            />
+            <img className="aspect-square object-cover" src={data} />
           ) : (
             <AiOutlineFile size={'100%'} />
           )}
