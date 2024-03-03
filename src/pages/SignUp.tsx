@@ -18,7 +18,7 @@ export const SignUp = () => {
 
   useEffect(() => {
     if (isSuccess(data)) {
-      navigate('/');
+      navigate('/sign-in');
     }
   }, [data]);
 
